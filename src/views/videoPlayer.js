@@ -4,7 +4,7 @@ var VideoPlayerView = Backbone.View.extend({
   },
 
   render: function(e) {
-    console.log(e);
+    console.log('e is', e);
     this.$el.html('<div class="loading">Please wait...</div>');
     return this;
   },
