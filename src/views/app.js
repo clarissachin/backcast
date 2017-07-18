@@ -4,9 +4,18 @@ var AppView = Backbone.View.extend({
 
   initialize: function() {
     this.videos = new Videos(
-      window.exampleVideoData
+      // window.exampleVideoData
     );
+
     this.render();
+
+    // listen for videos sync once(?)
+    this.videos.on('sync', () => {
+      // trigger select on first video
+      this.videos.at(0).select();
+    });
+
+    this.videos.search('jumping cats');
   },
 
   render: function() {
@@ -25,9 +34,10 @@ var AppView = Backbone.View.extend({
     }).render();
 
     // make playerView
-    var playerView = new VideoPlayerView({
+    new VideoPlayerView({
+      el: this.$('.player'),
       collection: this.videos
-    });
+    }).render();
 
     // this.$el.html(this.template({
     //   searchView: searchView.render().$el,
